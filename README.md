@@ -1,6 +1,80 @@
 # ci-timing-audit
 
-A skill that measures where a GitHub Actions repo's CI time goes: queue, setup and task seconds per job. This file is for people and agents who maintain the skill. Agents that use the skill read only `SKILL.md`.
+An agent skill that measures where a GitHub Actions repo's CI time goes. It splits each job's wall-clock time into three parts and reports the slowest jobs:
+
+- **Queue**: waiting for a machine.
+- **Setup**: checkout, toolchain setup, dependency install, cache restore and save.
+- **Task**: the steps that do the real work, such as build, test and lint.
+
+The skill is read-only. It never reruns, cancels or edits anything, and it refuses to fill a table with numbers it did not measure.
+
+## Install
+
+The skill needs the `gh` CLI, logged in, and Python 3.9 or later. It uses no Python packages.
+
+Copy `SKILL.md` and `scripts/` into a skill folder named `ci-timing-audit`. For Claude Code:
+
+```
+git clone git@github.com:2389-research/ci-auditor.git
+mkdir -p ~/.claude/skills/ci-timing-audit
+cp -R ci-auditor/SKILL.md ci-auditor/scripts ~/.claude/skills/ci-timing-audit/
+```
+
+Do not copy `tests/` or `evals/`, and do not clone the repo straight into the skills folder. An agent that can read the trial scenarios grades its own work against them.
+
+## Use
+
+Ask the agent a question about CI time in a GitHub Actions repo:
+
+- "Where does our CI time go?"
+- "Are jobs in the CI workflow of astral-sh/uv waiting for runners?"
+
+The agent runs the script, checks the setup and task split, and writes a report: the overall split, a table of the slowest jobs, and only the caveats that apply.
+
+You can also run the script yourself. It prints progress on stderr and JSON on stdout:
+
+```
+python3 scripts/ci_timing.py --repo rust-lang/cargo --limit 20 --top 2
+```
+
+| Flag | Meaning | Default |
+|---|---|---|
+| `--repo OWNER/NAME` | The repo to measure | the repo of the current directory |
+| `--limit N` | How many completed runs to read | 150 |
+| `--workflow NAME` | Read one workflow only, by name or file name | all workflows |
+| `--top N` | How many jobs to list | 5 |
+| `--sort total\|queue\|setup\|task` | Which mean to rank jobs by | `total` |
+| `--setup-pattern REGEX` | Count matching steps as setup. Repeat for more | none |
+| `--task-pattern REGEX` | Count matching steps as task. Repeat for more | none |
+
+Part of the output of that command on 2026-11-17, with one job shown and its step list cut:
+
+```json
+{
+  "repo": "rust-lang/cargo",
+  "runs_fetched": 20,
+  "runs_failed": [],
+  "jobs_measured": 169,
+  "distinct_jobs": 34,
+  "overall": {
+    "queue_pct": 0, "setup_pct": 7, "task_pct": 93,
+    "mean_queue_s": 2, "p90_queue_s": 3, "max_queue_s": 7
+  },
+  "slowest": [
+    {
+      "workflow": "CI",
+      "job": "Tests Windows aarch64 MSVC nightly",
+      "n": 5, "failed": 0,
+      "queue_s": 2, "setup_s": 124, "task_s": 2046, "total_s": 2171,
+      "p90_total_s": 2253, "share_pct": 13
+    }
+  ]
+}
+```
+
+`SKILL.md` explains how the split is computed and what each field means.
+
+The rest of this file is for people and agents who maintain the skill. Agents that use the skill read only `SKILL.md`.
 
 ## Layout
 
@@ -64,7 +138,7 @@ Each of these was seen on real repos on 2026-11-17 and has a test.
 
 ## Trial record
 
-All runs are from 2026-11-17, headless with `--safe-mode`, on Sonnet unless marked. They are archived in `~/eval-archives/ci-timing-audit/2026-11-17/`: `trials/` holds the first pass (one run each), `reps/` the repetitions, `micro*/` the wording micro-tests, and `skill-v1-original/` the single-file skill this replaced.
+All runs are from 2026-11-17, headless with `--safe-mode`, on Sonnet unless marked. The transcripts are not in this repo. They are archived on the maintainer's machine in `~/eval-archives/ci-timing-audit/2026-11-17/`: `trials/` holds the first pass (one run each), `reps/` the repetitions, `micro*/` the wording micro-tests, and `skill-v1-original/` the single-file skill this replaced.
 
 ### Audits
 
