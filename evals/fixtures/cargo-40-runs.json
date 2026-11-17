@@ -1,0 +1,375 @@
+{
+  "repo": "rust-lang/cargo",
+  "workflow": null,
+  "runs_fetched": 40,
+  "runs_failed": [],
+  "from": "2026-11-16T23:02:09Z",
+  "to": "2026-11-17T16:31:10Z",
+  "jobs_measured": 393,
+  "jobs_excluded": {
+    "cancelled": 44,
+    "rerun_copy": 37
+  },
+  "distinct_jobs": 34,
+  "overall": {
+    "queue_pct": 0,
+    "setup_pct": 7,
+    "task_pct": 93,
+    "mean_queue_s": 2,
+    "p90_queue_s": 3,
+    "max_queue_s": 22
+  },
+  "longest_queues": [
+    {
+      "workflow": "CI",
+      "job": "Tests Linux aarch64 stable",
+      "n": 13,
+      "queue_s": 5,
+      "max_queue_s": 22
+    },
+    {
+      "workflow": "CI",
+      "job": "Tests Linux aarch64 nightly",
+      "n": 11,
+      "queue_s": 4,
+      "max_queue_s": 5
+    },
+    {
+      "workflow": "Contrib Deploy",
+      "job": "deploy",
+      "n": 3,
+      "queue_s": 3,
+      "max_queue_s": 3
+    }
+  ],
+  "sorted_by": "total",
+  "setup_patterns_added": [],
+  "task_patterns_added": [],
+  "slowest": [
+    {
+      "workflow": "CI",
+      "job": "Tests Windows aarch64 MSVC nightly",
+      "n": 11,
+      "failed": 0,
+      "queue_s": 2,
+      "setup_s": 112,
+      "task_s": 1935,
+      "total_s": 2049,
+      "p90_total_s": 2210,
+      "max_queue_s": 2,
+      "steps": [
+        {
+          "name": "Run cargo test -p cargo",
+          "class": "task",
+          "mean_s": 1471
+        },
+        {
+          "name": "Clear test output",
+          "class": "task",
+          "mean_s": 140
+        },
+        {
+          "name": "Run cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests",
+          "class": "task",
+          "mean_s": 102
+        },
+        {
+          "name": "Fetch smoke test",
+          "class": "task",
+          "mean_s": 102
+        },
+        {
+          "name": "Check benchmarks",
+          "class": "task",
+          "mean_s": 90
+        },
+        {
+          "name": "Run rustup component add rustc-dev llvm-tools-preview rust-docs",
+          "class": "setup",
+          "mean_s": 67
+        },
+        {
+          "name": "Check operability of rustc invocation with argfile",
+          "class": "task",
+          "mean_s": 18
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "class": "setup",
+          "mean_s": 15
+        },
+        {
+          "name": "Run rustup update --no-self-update nightly-msvc && rustup default nightly-msvc",
+          "class": "setup",
+          "mean_s": 9
+        },
+        {
+          "name": "Clear benchmark output",
+          "class": "task",
+          "mean_s": 7
+        }
+      ],
+      "share_pct": 12
+    },
+    {
+      "workflow": "CI",
+      "job": "Tests Windows aarch64 MSVC stable",
+      "n": 11,
+      "failed": 0,
+      "queue_s": 2,
+      "setup_s": 35,
+      "task_s": 1789,
+      "total_s": 1826,
+      "p90_total_s": 1957,
+      "max_queue_s": 3,
+      "steps": [
+        {
+          "name": "Run cargo test -p cargo",
+          "class": "task",
+          "mean_s": 1345
+        },
+        {
+          "name": "Clear test output",
+          "class": "task",
+          "mean_s": 124
+        },
+        {
+          "name": "Fetch smoke test",
+          "class": "task",
+          "mean_s": 102
+        },
+        {
+          "name": "Run cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests",
+          "class": "task",
+          "mean_s": 98
+        },
+        {
+          "name": "Check benchmarks",
+          "class": "task",
+          "mean_s": 92
+        },
+        {
+          "name": "Check operability of rustc invocation with argfile",
+          "class": "task",
+          "mean_s": 18
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "class": "setup",
+          "mean_s": 16
+        },
+        {
+          "name": "Clear benchmark output",
+          "class": "task",
+          "mean_s": 7
+        },
+        {
+          "name": "Run rustup update --no-self-update stable",
+          "class": "setup",
+          "mean_s": 5
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "class": "setup",
+          "mean_s": 5
+        }
+      ],
+      "share_pct": 11
+    },
+    {
+      "workflow": "CI",
+      "job": "Tests Windows x86_64 gnu nightly",
+      "n": 12,
+      "failed": 1,
+      "queue_s": 2,
+      "setup_s": 135,
+      "task_s": 1364,
+      "total_s": 1501,
+      "p90_total_s": 1801,
+      "max_queue_s": 3,
+      "steps": [
+        {
+          "name": "Run cargo test -p cargo",
+          "class": "task",
+          "mean_s": 1061
+        },
+        {
+          "name": "Run cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests",
+          "class": "task",
+          "mean_s": 110
+        },
+        {
+          "name": "Check benchmarks",
+          "class": "task",
+          "mean_s": 82
+        },
+        {
+          "name": "Run rustup component add rustc-dev llvm-tools-preview rust-docs",
+          "class": "setup",
+          "mean_s": 79
+        },
+        {
+          "name": "Fetch smoke test",
+          "class": "task",
+          "mean_s": 67
+        },
+        {
+          "name": "Clear test output",
+          "class": "task",
+          "mean_s": 51
+        },
+        {
+          "name": "Run rustup update --no-self-update stable",
+          "class": "setup",
+          "mean_s": 21
+        },
+        {
+          "name": "Run rustup update --no-self-update nightly-gnu && rustup default nightly-gnu",
+          "class": "setup",
+          "mean_s": 13
+        },
+        {
+          "name": "Check operability of rustc invocation with argfile",
+          "class": "task",
+          "mean_s": 12
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "class": "setup",
+          "mean_s": 7
+        }
+      ],
+      "share_pct": 10
+    },
+    {
+      "workflow": "CI",
+      "job": "Tests macOS aarch64 nightly",
+      "n": 11,
+      "failed": 0,
+      "queue_s": 2,
+      "setup_s": 54,
+      "task_s": 1291,
+      "total_s": 1347,
+      "p90_total_s": 1455,
+      "max_queue_s": 3,
+      "steps": [
+        {
+          "name": "Run cargo test -p cargo",
+          "class": "task",
+          "mean_s": 908
+        },
+        {
+          "name": "Fetch smoke test",
+          "class": "task",
+          "mean_s": 160
+        },
+        {
+          "name": "Run cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests",
+          "class": "task",
+          "mean_s": 90
+        },
+        {
+          "name": "Check benchmarks",
+          "class": "task",
+          "mean_s": 77
+        },
+        {
+          "name": "Clear test output",
+          "class": "task",
+          "mean_s": 37
+        },
+        {
+          "name": "Run rustup component add rustc-dev llvm-tools-preview rust-docs",
+          "class": "setup",
+          "mean_s": 19
+        },
+        {
+          "name": "Check operability of rustc invocation with argfile",
+          "class": "task",
+          "mean_s": 11
+        },
+        {
+          "name": "Run rustup update --no-self-update stable",
+          "class": "setup",
+          "mean_s": 9
+        },
+        {
+          "name": "Run rustup update --no-self-update nightly && rustup default nightly",
+          "class": "setup",
+          "mean_s": 7
+        },
+        {
+          "name": "Check LLDB debugger tool",
+          "class": "task",
+          "mean_s": 4
+        }
+      ],
+      "share_pct": 8
+    },
+    {
+      "workflow": "CI",
+      "job": "Tests Windows x86_64 MSVC nightly",
+      "n": 11,
+      "failed": 0,
+      "queue_s": 2,
+      "setup_s": 114,
+      "task_s": 1204,
+      "total_s": 1320,
+      "p90_total_s": 1575,
+      "max_queue_s": 3,
+      "steps": [
+        {
+          "name": "Run cargo test -p cargo",
+          "class": "task",
+          "mean_s": 917
+        },
+        {
+          "name": "Run cargo test --workspace --exclude cargo --exclude benchsuite --exclude resolver-tests",
+          "class": "task",
+          "mean_s": 91
+        },
+        {
+          "name": "Check benchmarks",
+          "class": "task",
+          "mean_s": 68
+        },
+        {
+          "name": "Run rustup component add rustc-dev llvm-tools-preview rust-docs",
+          "class": "setup",
+          "mean_s": 63
+        },
+        {
+          "name": "Fetch smoke test",
+          "class": "task",
+          "mean_s": 59
+        },
+        {
+          "name": "Clear test output",
+          "class": "task",
+          "mean_s": 52
+        },
+        {
+          "name": "Run rustup update --no-self-update stable",
+          "class": "setup",
+          "mean_s": 21
+        },
+        {
+          "name": "Check operability of rustc invocation with argfile",
+          "class": "task",
+          "mean_s": 11
+        },
+        {
+          "name": "Run rustup update --no-self-update nightly-msvc && rustup default nightly-msvc",
+          "class": "setup",
+          "mean_s": 9
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "class": "setup",
+          "mean_s": 6
+        }
+      ],
+      "share_pct": 8
+    }
+  ]
+}

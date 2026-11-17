@@ -1,0 +1,1 @@
+Our CI feels slow. Audit the CI timing for rust-lang/cargo over the last 40 runs and tell me where the time goes.
